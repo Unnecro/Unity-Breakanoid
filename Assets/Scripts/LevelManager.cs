@@ -3,6 +3,12 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour {
 
+	public void Update(){
+		if(Input.GetKeyDown("space")){
+			LoadNextLevel();
+		}
+	}
+
 	public void LoadLevel(string name){
 		Debug.Log("Level load requested for " + name);
 		Brick.resetBrickStatus();

@@ -4,8 +4,14 @@ using System.Collections;
 public class Brick : MonoBehaviour {
 	
 	public Sprite[] hit_sprites;
+
 	public AudioClip audio_break;
-	public int audio_break_volume = 1;
+	[Range(0.0f, 1.0f)]
+	public float break_volume = 0.5f;
+
+	public AudioClip audio_hit;
+	[Range(0.0f, 1.0f)]
+	public float hit_volume = 0.3f;
 
 	public static int breakable_count = 0;
 
@@ -43,17 +49,14 @@ public class Brick : MonoBehaviour {
 		this.times_hit++;
 
 		if(times_hit >= max_hits){
-			AudioSource.PlayClipAtPoint(audio_break, transform.position, audio_break_volume);
+			AudioSource.PlayClipAtPoint(audio_break, Camera.main.transform.position, break_volume);
 			breakable_count--;
 			levelManager.BrickDestroyed();
 			Destroy(gameObject);
 		} else {
+			AudioSource.PlayClipAtPoint(audio_hit, Camera.main.transform.position, break_volume);
 			LoadSprites();
 		}
-
-		// if(max_hits == times_hit){
-		// 	this.transform.position = new Vector3(this.transform.position.x, 1000f, this.transform.position.y);
-		// }
 	}
 
 	void LoadSprites(){

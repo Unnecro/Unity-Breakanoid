@@ -6,7 +6,7 @@ public class Paddle : MonoBehaviour {
 	float units_pos_x = 0.0f;
 	// Use this for initialization
 
-	private float limit_spacing = 1.2f;
+	private float limit_spacing = 1.1f;
 	private int num_units = 16;
 
 	void Start () {

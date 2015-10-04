@@ -10,7 +10,7 @@ public class Paddle : MonoBehaviour {
 	private int num_units = 16;
 
 	void Start () {
-	
+		Cursor.visible = false;
 	}
 	
 	// Update is called once per frame

@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void LoadLevel(string name){
-		Debug.Log("Level load requested for " + name);
+		Cursor.visible = true;
 		Brick.resetBrickStatus();
 		Application.LoadLevel(name);
 	}
@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void LoadNextLevel(){
+		Cursor.visible = true;
 		Brick.resetBrickStatus();
 		Application.LoadLevel(Application.loadedLevel + 1);
 	}

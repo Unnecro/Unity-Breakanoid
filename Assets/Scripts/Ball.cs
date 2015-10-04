@@ -22,12 +22,13 @@ public class Ball : MonoBehaviour {
 		if(!is_game_started){
 			this.transform.position = paddle.transform.position + paddle_to_ball_v3;
 			if(Input.GetMouseButtonDown(0)){
-				this.GetComponent<Rigidbody2D>().velocity = new Vector2(-7.5f, 7.5f);
+				float kick_x = limitKick();
+				float kick_y = 7.5f;
+
+				this.GetComponent<Rigidbody2D>().velocity = new Vector2(kick_x, kick_y);
 
 				is_game_started = true;
 			}
-		} else {
-
 		}
 	}
 
@@ -39,6 +40,23 @@ public class Ball : MonoBehaviour {
 			GetComponent<Rigidbody2D>().velocity += tweak;
 			GetComponent<AudioSource>().Play();
 		}
+	}
+
+	float limitKick(){
+		float first_kick_x = Random.Range(-10f, 10f);
+		float min_range;
+		float max_range;
+		if(first_kick_x <= 0){
+			min_range = -10f;
+			max_range = -3f;
+		} else {
+			min_range = 3f;
+			max_range = 10f;
+		}
+
+		first_kick_x = Mathf.Clamp(first_kick_x, min_range, max_range);
+
+		return first_kick_x;
 	}
 
 	public void resetPosition(){

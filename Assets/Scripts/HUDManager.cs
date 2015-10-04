@@ -39,6 +39,10 @@ public class HUDManager : MonoBehaviour {
 		list_lives.RemoveAt(retries);
 	}
 
+	static public void clearLives(){
+		list_lives.Clear();
+	}
+
 	// Update is called once per frame
 	void Update () {
 		

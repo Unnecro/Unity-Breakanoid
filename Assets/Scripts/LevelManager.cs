@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour {
 
 	public void LoadLevel(string name){
 		Cursor.visible = true;
-		Brick.resetBrickStatus();
+		resetGameStatus();
 		Application.LoadLevel(name);
 	}
 
@@ -22,15 +22,20 @@ public class LevelManager : MonoBehaviour {
 
 	public void LoadNextLevel(){
 		Cursor.visible = true;
-		Brick.resetBrickStatus();
+		resetGameStatus();
 		Application.LoadLevel(Application.loadedLevel + 1);
 	}
 
 	public void BrickDestroyed(){
 		if(Brick.breakable_count <= 0){
-			Brick.resetBrickStatus();
+			resetGameStatus();
 			LoadNextLevel();
 		}
+	}
+
+	private void resetGameStatus(){
+		Brick.resetBrickStatus();
+		HUDManager.clearLives();
 	}
 
 }

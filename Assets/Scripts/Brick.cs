@@ -21,6 +21,8 @@ public class Brick : MonoBehaviour {
 	private int times_hit;
 	private bool is_breakable;
 
+	public GameObject smoke;
+
 	// Use this for initialization
 	void Start () {
 		is_breakable = (this.tag == "Breakable");
@@ -52,6 +54,9 @@ public class Brick : MonoBehaviour {
 			AudioSource.PlayClipAtPoint(audio_break, Camera.main.transform.position, break_volume);
 			breakable_count--;
 			levelManager.BrickDestroyed();
+
+			puffSmoke();
+
 			Destroy(gameObject);
 		} else {
 			AudioSource.PlayClipAtPoint(audio_hit, Camera.main.transform.position, break_volume);
@@ -59,11 +64,18 @@ public class Brick : MonoBehaviour {
 		}
 	}
 
+	void puffSmoke(){
+		GameObject a = Instantiate(smoke, gameObject.transform.position, Quaternion.identity) as GameObject; 
+		a.GetComponent<ParticleSystem>().startColor = this.GetComponent<SpriteRenderer>().color;
+	}
+
 	void LoadSprites(){
 		int sprite_index = times_hit - 1;
 
 		if(hit_sprites[sprite_index]){
 			this.GetComponent<SpriteRenderer>().sprite = hit_sprites[sprite_index];
+		} else {
+			Debug.LogError(this.name + " is missing sprite");
 		}
 	}
 

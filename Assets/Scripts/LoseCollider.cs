@@ -15,10 +15,13 @@ public class LoseCollider : MonoBehaviour {
 
 		ball = GameObject.Find("Ball").GetComponent<Ball>();
 		retries = max_retries;
+		HUDManager.retries = retries;
 	}
 
 	void OnTriggerEnter2D(Collider2D trigger){
 		retries--;
+		HUDManager.retries = retries;
+		HUDManager.removeLiveSprite();
 		if(retries <= 0){
 			levelManager.LoadLevel("Loose Screen");
 		} else {

@@ -29,6 +29,9 @@ public class Ball : MonoBehaviour {
 
 				is_game_started = true;
 			}
+		} else {
+			Vector2 velocity = normalizeVelocity(GetComponent<Rigidbody2D>().velocity);
+			GetComponent<Rigidbody2D>().velocity = velocity;
 		}
 	}
 
@@ -39,6 +42,22 @@ public class Ball : MonoBehaviour {
 			GetComponent<Rigidbody2D>().velocity += tweak;
 			GetComponent<AudioSource>().Play();
 		}
+	}
+
+	Vector2 normalizeVelocity(Vector2 current_velocity){
+		float x = current_velocity.x;
+		if(current_velocity.x < 2f && current_velocity.x > -2f){
+			x *= 2;
+		}
+		
+		float y = current_velocity.y;
+		if(current_velocity.y < 2f && current_velocity.y > -2f){
+			y *= 2;
+		}
+
+		Vector2 velocity = new Vector2(x, y); 
+
+		return velocity;
 	}
 
 	float limitKick(){

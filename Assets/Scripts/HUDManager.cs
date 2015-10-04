@@ -34,7 +34,6 @@ public class HUDManager : MonoBehaviour {
 	}
 
 	static public void removeLiveSprite(){
-		int a = list_lives.Count;
 		Destroy(list_lives[retries]);
 		list_lives.RemoveAt(retries);
 	}
